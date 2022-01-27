@@ -9,25 +9,63 @@ import java.util.Random;
 @Service
 public class UserService {
 
-    private final HashMap<Long, User> hashMap = new HashMap<>();
+    private HashMap<String, String> hashMap = new HashMap<>();
 
-    public void createUser( String username, String password, String firstName, String lastName) {
+    public User createUser( String username, String password, String firstName, String lastName) {
         Random random = new Random();
-        Long id = random.nextLong();
+        int id = random.nextInt();
         User user = new User(id,username, password, firstName, lastName);
-        hashMap.put(id, user);
-        User user1 = hashMap.get(id);
-    }
-
-    public User getUser(String id) {
-
-
-        User user = hashMap.get(id);
-
+        hashMap.put("id", String.valueOf(id));
+        hashMap.put("username", username);
+        hashMap.put("password", password);
+        hashMap.put("firstName", firstName);
+        hashMap.put("lastName", lastName);
+//        User user = hashMap.get(id);
         return user;
     }
 
+    public User getUser(String firstName) {
+        User user = new User();
+        user.setId(Integer.parseInt(hashMap.get("id")));
+        user.setUsername(hashMap.get("username"));
+        user.setFirstName(hashMap.get("firstName"));
+        user.setLastName(hashMap.get("lastName"));
+        user.setPassword(hashMap.get("password"));
+        user.setHashMap(hashMap);
+        return user;
+    }
+//    SELECT * FROM USERS WHERE firstName = '';
+    public User updateUser(String newFirstName, String newLastName) {
+        User user = new User();
+        hashMap.replace("firstName", newFirstName);
+        hashMap.replace("lastName", newLastName);
 
+        user.setId(Integer.parseInt(hashMap.get("id")));
+        user.setUsername(hashMap.get("username"));
+        user.setFirstName(hashMap.get("firstName"));
+        user.setLastName(hashMap.get("lastName"));
+        user.setPassword(hashMap.get("password"));
+        user.setHashMap(hashMap);
+        return user;
+    }
+    public User deleteUser(String firstName) {
+        User user = new User();
+
+        hashMap.put("id", null);
+        hashMap.put("username", null);
+        hashMap.put("password", null);
+        hashMap.put("firstName", null);
+        hashMap.put("lastName",null);
+
+        System.out.println(hashMap.get("id") == null);
+
+        user.setId(0);
+        user.setUsername(hashMap.get("username"));
+        user.setFirstName(hashMap.get("firstName"));
+        user.setLastName(hashMap.get("lastName"));
+        user.setPassword(hashMap.get("password"));
+        return user;
+    }
 
 
 }

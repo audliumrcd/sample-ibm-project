@@ -1,16 +1,22 @@
 package com.ibm.user.entity;
 
+import java.util.HashMap;
+
 public class User {
 
-    private Long id;
+    private int id;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
 
+
+
+    private HashMap<String, String> hashMap;
+
     public User() {}
 
-    public User(Long id, String username, String password, String firstName, String lastName) {
+    public User(int id, String username, String password, String firstName, String lastName) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -18,11 +24,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getLastName() {
@@ -52,5 +58,25 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public HashMap<String, String> getHashMap() {
+        return hashMap;
+    }
+
+    public void setHashMap(HashMap<String, String> hashMap) {
+        this.hashMap = hashMap;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", hashMap=" + hashMap +
+                '}';
     }
 }

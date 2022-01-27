@@ -14,28 +14,35 @@ public class UserController {
     @Autowired
     public void setUserService(UserService userService) {this.userService = userService; }
 
-    @GetMapping("/create-sample")
-    public User hello() {
+    @PostMapping("/create-sample")
+    public User hello(@RequestParam String username, @RequestParam String password,
+                      @RequestParam String firstName, @RequestParam String lastName) {
 
-        return userService.createUser(  "testusername", "testpassword", "firstName", "lastName");
+        return userService.createUser(username, password, firstName, lastName);
     }
 
     @GetMapping("/read")
-    public User getUser(@RequestParam String id) {
+    public User getUser(@RequestParam String firstName) {
 
-        return userService.getUser(user1);
+        return userService.getUser(firstName);
     }
 
     /*@PostMapping("/create")
     public User createUser(@RequestBody User user) {
         User created = userService.createUser(user);
         return userService.createUser(user);
-    }
-
-    @PutMapping("/update/{id}")
-    public User updateUser(@PathVariable String id) {
-
-        return userService.update(id,user );
     }*/
 
+    @PutMapping("/update/")
+    public User updateUser(@RequestParam String newFirstName,
+                           @RequestParam String newLastName) {
+
+        return userService.updateUser(newFirstName, newLastName);
+    }
+
+    @DeleteMapping("/delete")
+    public User deleteUser(@RequestParam String firstName) {
+
+        return userService.deleteUser(firstName);
+    }
 }
